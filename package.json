@@ -1,0 +1,33 @@
+{
+  "name": "generator-service-app",
+  "version": "0.0.0",
+  "description": "这是Wyatt风格的服务应用开发模板,包含git标准分支模型模板",
+  "homepage": "",
+  "author": {
+    "name": "ZhyMc",
+    "email": "854185073@qq.com",
+    "url": ""
+  },
+  "main": "generator/index.js",
+  "keywords": [
+    "",
+    "yeoman-generator"
+  ],
+  "devDependencies": {
+    "jest": "^26.1.0",
+    "yeoman-assert": "^3.1.0",
+    "yeoman-test": "^1.7.0"
+  },
+  "engines": {
+    "npm": ">= 4.0.0"
+  },
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "readdirp": "^3.5.0",
+    "yeoman-generator": "^2.0.1",
+    "yosay": "^2.0.1"
+  },
+  "scripts": {},
+  "repository": "ZhyMC/generator-service-app",
+  "license": "Apache-2.0"
+}

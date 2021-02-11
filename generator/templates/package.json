@@ -1,0 +1,35 @@
+{
+    "name": "<%= service_name %>",
+    "version": "0.0.0",
+    "description": "",
+    "homepage": "",
+    "main": "./lib/index.js",
+    "types": "./lib/index.d.ts",
+    "keywords": [],
+    "devDependencies": {
+        "@types/node": "^14.14.25",
+        "typescript": "^4.1.5",
+        "@types/mocha": "^8.0.3",
+        "cz-conventional-changelog": "^3.3.0",
+        "ts-node": "^9.0.0",
+        "debug": "^4.2.0",
+        "nyc": "^15.1.0"
+    },
+    "dependencies": {
+        "meow": "^9.0.0",
+        "tiny-typed-emitter": "^2.0.3"
+    },
+    "scripts": {
+        "compile": "tsc",
+        "prepare": "npm run compile",
+        "test-cov": "nyc --reporter=lcov npm test",
+        "start": "node ./bin/cli",
+        "docker:build":"docker build -t <%= org_name %>/<%= service_name %> ."
+    },
+    "config": {
+        "commitizen": {
+          "path": "./node_modules/cz-conventional-changelog"
+        }
+    },
+    "license": "MIT"
+}
