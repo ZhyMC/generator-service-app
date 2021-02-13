@@ -1,0 +1,48 @@
+def server_id = "server";
+def work_agent
+
+if (BRANCH_NAME == "master"){
+    work_agent = server_id + "-production-node"
+}else{
+    work_agent = server_id + "-test-node"
+}
+
+
+pipeline{
+    agent {
+        label work_agent
+    }
+    stages{
+        stage("prepare"){
+            steps{
+                script{
+                    build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+                }
+                echo "version : ${build_tag}"
+            }
+        }
+        stage("install"){
+            steps{
+                sh 'npm install --registry=https://registry.npm.taobao.org/'
+            }
+        }
+        stage("build"){
+            steps{
+                sh "npm run build -- --version ${build_tag}"
+            }
+        }
+        stage("deploy"){
+            steps{
+                sh "npm run deploy -- --version ${build_tag}"
+            }
+        }
+    }
+    post{
+        success{
+            echo "======== pipeline all done ========"
+        }
+        failure{
+            echo "======== pipeline failed ========"
+        }
+    }
+}

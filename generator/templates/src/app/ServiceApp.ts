@@ -24,7 +24,9 @@ export class ServiceApp implements IServiceApp{
         this.initContext();
         this.initAPI();
 
-        console.log(`Hello world! The config of the app: `, this.config);
+        setInterval(()=>{
+            console.log(`Hello world! The config of the app: `, this.config);
+        },1000);
     }
     private initAPI(){
         this.api = new ServiceAPI(this.context as AppContext);

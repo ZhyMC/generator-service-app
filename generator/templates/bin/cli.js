@@ -9,6 +9,7 @@ const cli = meow(`
     Options:
         --init : initialize a default json config file
         --config, -c : specified a config path
+        --start : start the service
 
 `,{
     flags:{
@@ -18,16 +19,24 @@ const cli = meow(`
         config:{
             type:"string",
             alias:"c"
+        },
+        start:{
+            type:"boolean"
         }
     }
 });
 
-const config_file = cli.flags.config || "config.json";
+function getConfig(){
+    const config_file = cli.flags.config || "config.json";
+    const config = JSON.parse(fs.readFileSync(config_file).toString());
+
+    return config;
+}
 
 if(cli.flags.init){
     fs.writeFileSync(config_file,JSON.stringify(AppDefaultConfig,"\t",2));
-}else if(cli.flags.config){
-    const config = JSON.parse(fs.readFileSync(cli.flags.config).toString());
+}else if(cli.flags.start){
+    const config = getConfig();
     const app = new ServiceApp(config);
     app.start();
 }else{

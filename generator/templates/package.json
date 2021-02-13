@@ -24,7 +24,8 @@
         "prepare": "npm run compile",
         "test-cov": "nyc --reporter=lcov npm test",
         "start": "node ./bin/cli",
-        "docker:build":"docker build -t <%= org_name %>/<%= service_name %> ."
+        "build":"node ./scripts/build",
+        "deploy":"node ./scripts/deploy"
     },
     "config": {
         "commitizen": {
