@@ -23,7 +23,7 @@ pipeline{
         }
         stage("install"){
             steps{
-                sh 'npm ci --registry=https://registry.npm.taobao.org/'
+                sh 'npm ci'
             }
         }
         stage("test"){
