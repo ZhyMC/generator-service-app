@@ -22,6 +22,7 @@
     "scripts": {
         "compile": "tsc",
         "prepare": "npm run compile",
+        "test":"mocha",
         "test-cov": "nyc --reporter=lcov npm test",
         "start": "node ./bin/cli",
         "build":"node ./scripts/build",

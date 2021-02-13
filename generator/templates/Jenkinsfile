@@ -21,6 +21,11 @@ pipeline{
                 echo "version : ${build_tag}"
             }
         }
+        stage("test"){
+            steps{
+                sh 'npm test'
+            }
+        }
         stage("install"){
             steps{
                 sh 'npm install --registry=https://registry.npm.taobao.org/'
