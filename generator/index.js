@@ -77,7 +77,7 @@ module.exports = class extends Generator {
       const package_obj = this.fs.readJSON(this.templatePath("./package.json"));
 
       package_obj.config.org = this.org_name;
-      package_obj.config.expose_port = this.expose_port;
+      package_obj.config.expose_port = [this.expose_port+""];
       package_obj.name = this.serv_name;
 
       this.fs.extendJSON(this.destinationPath("./package.json"),{name:package_obj.name});

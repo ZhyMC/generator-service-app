@@ -18,7 +18,9 @@ const cli = meow(`
 
 
 const BUILD_TAG = cli.flags.version;
-const image_name = `${package.config.org}/${package.name}:${package.version}-${BUILD_TAG}`;
+
+const serv_name = package.name.replace(/\./g,"_");
+const image_name = `${package.config.org}/${serv_name}:${package.version}-${BUILD_TAG}`;
 
 const builder = spawn('docker', ['build','-t',image_name,"."]);
 

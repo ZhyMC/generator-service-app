@@ -1,10 +1,12 @@
-def server_id = "server";
+def test_server_tag = "simple-test-server"
+def prod_server_tag = "simple-prod-server"
+
 def work_agent
 
 if (BRANCH_NAME == "master"){
-    work_agent = server_id + "-production-node"
+    work_agent = prod_server_tag
 }else{
-    work_agent = server_id + "-test-node"
+    work_agent = test_server_tag
 }
 
 

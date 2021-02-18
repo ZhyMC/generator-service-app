@@ -45,7 +45,7 @@ function updateServiceImage(serv_name,image_name){
 function createService(serv_name,image_name,expose_ports,config_name){
     let ports_param = [];
     for(const port of expose_ports){
-        ports_param.push("--publish",`${port}:${port}`);
+        ports_param.push("--publish", `${port}:${port}/tcp`, "--publish", `${port}:${port}/udp`);
     }
     let proc = spawn(`docker`,['service','create',"-d",'--config',`source=${config_name},target=/etc/app.conf`,'--name',serv_name,...ports_param,image_name]);
     proc.stdout.pipe(process.stdout)
@@ -60,21 +60,23 @@ function createService(serv_name,image_name,expose_ports,config_name){
 function runScript(){
     const build_tag = cli.flags.version;
 
+    const serv_name = package.name.replace(/\./g,"_");
+
     const expose_port = package.config.expose_port;
-    const image_name = `${package.config.org}/${package.name}:${package.version}-${build_tag}`;
-    const config_name = `config-${package.name}`;
+    const image_name = `${package.config.org}/${serv_name}:${package.version}-${build_tag}`;
+    const config_name = `config-${serv_name}`;
     
     if(!isDockerConfigExists(config_name))
         throw new Error(`You must create docker config named '${config_name}' first!`);
     
-    if(isDockerServiceRunning(package.name)){
-        console.log(`Detected that service ${package.name} is running, start to update image`);
+    if(isDockerServiceRunning(serv_name)){
+        console.log(`Detected that service ${serv_name} is running, start to update image`);
     
-        updateServiceImage(package.name,image_name);
+        updateServiceImage(serv_name,image_name);
     }else{
-        console.log(`Detected that service ${package.name} isn't running, create a new service`);
+        console.log(`Detected that service ${serv_name} isn't running, create a new service`);
     
-        createService(package.name,image_name,[expose_port],config_name);
+        createService(serv_name,image_name,[expose_port],config_name);
     }
 
 }

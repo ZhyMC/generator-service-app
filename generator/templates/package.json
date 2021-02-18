@@ -5,7 +5,7 @@
     "homepage": "",
     "config": {
         "org": "<%= org_name %>",
-        "expose_port": "<%= expose_port %>",
+        "expose_port": ["<%= expose_port %>"],
         "commitizen": {
             "path": "./node_modules/cz-conventional-changelog"
         }
