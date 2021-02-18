@@ -68,7 +68,12 @@ module.exports = class extends Generator {
 
     if(this.fs.exists(this.destinationPath("./package.json"))){
       const package_obj = this.fs.readJSON(this.templatePath("./package.json"));
+
+      package_obj.config.org = this.org_name;
+      package_obj.config.expose_port = this.expose_port;
+      package_obj.name = this.serv_name;
       
+      this.fs.extendJSON(this.destinationPath("./package.json"),{name:package_obj.name});
       this.fs.extendJSON(this.destinationPath("./package.json"),{config:package_obj.config});
       this.fs.extendJSON(this.destinationPath("./package.json"),{scripts:package_obj.scripts});  
       this.fs.extendJSON(this.destinationPath("./package.json"),{devDependencies:package_obj.devDependencies});  
