@@ -1,7 +1,7 @@
-export interface AppConfig{
+export interface ServiceAppConfig{
 
 };
 
-export const AppDefaultConfig : AppConfig = {
+export const ServiceAppDefaultConfig : ServiceAppConfig = {
 
 };

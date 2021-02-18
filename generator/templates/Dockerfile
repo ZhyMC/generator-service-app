@@ -4,7 +4,6 @@ RUN mkdir -p /root/app/
 WORKDIR /root/app
 COPY . .
 
-
-EXPOSE <%= expose_port %>
+RUN npm install
 
 CMD ["npm","start","--","--start","--config","/etc/app.conf"]

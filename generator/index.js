@@ -38,12 +38,20 @@ module.exports = class extends Generator {
       validate:(x)=>(!!x)
     })).expose_port;
 
+    this.generate_source = (await this.prompt({
+      type:"confirm",
+      name:"generate_source",
+      message:"要生成默认服务程序源码吗？",
+      default:false
+    })).generate_source
   }
   default(){
     this.destinationRoot(this.serv_name);
   }
 
   writing() {
+
+    this.conflicter.force=true;
     let data = {
       service_name : this.serv_name,
       service_short_name : this.serv_short_name,
@@ -51,8 +59,36 @@ module.exports = class extends Generator {
       expose_port : this.expose_port
     };
 
-    this.fs.copyTpl(this.templatePath("**/*"),this.destinationPath("./"),data);
-    this.fs.copyTpl(this.templatePath(".*"),this.destinationPath("./"),data);
+    this.fs.copyTpl(this.templatePath("./bin/**/*"),this.destinationPath("./bin"),data);
+    this.fs.copyTpl(this.templatePath("./scripts/**/*"),this.destinationPath("./scripts"),data);
+    this.fs.copyTpl(this.templatePath("./test/**/*"),this.destinationPath("./test"),data);
+
+    if(this.generate_source)
+      this.fs.copyTpl(this.templatePath("./src/**/*"),this.destinationPath("./src"),data);
+
+    if(this.fs.exists(this.destinationPath("./package.json"))){
+      const package_obj = this.fs.readJSON(this.templatePath("./package.json"));
+      
+      this.fs.extendJSON(this.destinationPath("./package.json"),{config:package_obj.config});
+      this.fs.extendJSON(this.destinationPath("./package.json"),{scripts:package_obj.scripts});  
+      this.fs.extendJSON(this.destinationPath("./package.json"),{devDependencies:package_obj.devDependencies});  
+      this.fs.extendJSON(this.destinationPath("./package.json"),{dependencies:package_obj.dependencies});  
+      
+    }else{
+      this.fs.copyTpl(this.templatePath("./package.json"),this.destinationPath("./package.json"));
+    }
+
+    this.fs.copyTpl(this.templatePath(".mocharc.json"),this.destinationPath(".mocharc.json"),data);
+    this.fs.copyTpl(this.templatePath("Dockerfile"),this.destinationPath("Dockerfile"),data);
+    this.fs.copyTpl(this.templatePath("Jenkinsfile"),this.destinationPath("Jenkinsfile"),data);
+    this.fs.copyTpl(this.templatePath("LICENSE"),this.destinationPath("LICENSE"),data);
+    this.fs.copyTpl(this.templatePath("tsconfig.json"),this.destinationPath("tsconfig.json"),data);
+    this.fs.copyTpl(this.templatePath("README.md"),this.destinationPath("README.md"),data);
+    this.fs.copyTpl(this.templatePath(".release-it.js"),this.destinationPath(".release-it.js"),data);
+    this.fs.copyTpl(this.templatePath(".gitignore"),this.destinationPath(".gitignore"),data);
+    this.fs.copyTpl(this.templatePath(".npmignore"),this.destinationPath(".npmignore"),data);
+    this.fs.copyTpl(this.templatePath(".dockerignore"),this.destinationPath(".dockerignore"),data);
+
   }
   
   async install() {

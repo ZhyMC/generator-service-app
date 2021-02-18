@@ -1,5 +1,6 @@
 const meow = require("meow");
 const {spawn} = require("child_process");
+const package = require("../package.json");
 
 const cli = meow(`
     to build the project, you should specify params firstly
@@ -17,7 +18,7 @@ const cli = meow(`
 
 
 const BUILD_TAG = cli.flags.version;
-const image_name = `<%= org_name %>/<%= service_name %>:${BUILD_TAG}`;
+const image_name = `${package.config.org}/${package.name}:${BUILD_TAG}`;
 
 const builder = spawn('docker', ['build','-t',image_name,"."]);
 

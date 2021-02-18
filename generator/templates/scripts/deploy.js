@@ -1,5 +1,6 @@
 const meow = require("meow");
 const { execSync,spawn, spawnSync } = require("child_process")
+const package = require("../package.json");
 
 const cli = meow(`
     to deploy the project, you should specify params firstly
@@ -56,23 +57,26 @@ function createService(serv_name,image_name,expose_ports,config_name){
 
 }
 
-const build_tag = cli.flags.version;
+function runScript(){
+    const build_tag = cli.flags.version;
 
-const serv_name = `<%= service_name %>`;
-const expose_port = `<%= expose_port %>`;
-const image_name = `<%= org_name %>/<%= service_name %>:${build_tag}`;
-const config_name = `${serv_name}-config`;
+    const expose_port = package.config.expose_port;
+    const image_name = `${package.config.org}/${package.name}:${build_tag}`;
+    const config_name = `config-${package.name}`;
+    
+    if(!isDockerConfigExists(config_name))
+        throw new Error(`You must create docker config named '${config_name}' first!`);
+    
+    if(isDockerServiceRunning(package.name)){
+        console.log(`Detected that service ${package.name} is running, start to update image`);
+    
+        updateServiceImage(package.name,image_name);
+    }else{
+        console.log(`Detected that service ${package.name} isn't running, create a new service`);
+    
+        createService(package.name,image_name,[expose_port],config_name);
+    }
 
-if(!isDockerConfigExists(config_name))
-    throw new Error(`You must create docker config named '${config_name}' first!`);
-
-if(isDockerServiceRunning(serv_name)){
-    console.log(`Detected that service ${serv_name} is running, start to update image`);
-
-    updateServiceImage(serv_name,image_name);
-}else{
-    console.log(`Detected that service ${serv_name} isn't running, create a new service`);
-
-    createService(serv_name,image_name,[expose_port],config_name);
 }
 
+runScript();

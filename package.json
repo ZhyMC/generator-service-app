@@ -5,8 +5,7 @@
   "homepage": "",
   "author": {
     "name": "ZhyMc",
-    "email": "854185073@qq.com",
-    "url": ""
+    "email": "854185073@qq.com"
   },
   "main": "generator/index.js",
   "keywords": [

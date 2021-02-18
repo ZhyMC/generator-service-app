@@ -1,4 +1,6 @@
-{
+const package = require("./package.json")
+
+module.exports = {
     "git":false,
     "npm":{
         "publish":false
@@ -11,6 +13,6 @@
     "github": {
       "release": true,
       "assets":["./*.tgz"],
-      "releaseName": "<%= service_name %> ${version}"
+      "releaseName": `${package.name} ${version}`
     }
 }

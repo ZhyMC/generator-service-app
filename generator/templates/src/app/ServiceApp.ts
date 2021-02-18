@@ -1,6 +1,6 @@
 
 import { IServiceApp } from "./IServiceApp";
-import { AppConfig } from "./ServiceAppConfig";
+import { ServiceAppConfig } from "./ServiceAppConfig";
 import { AppContext } from "./AppContext";
 import { ServiceAPI } from "../api/ServiceAPI";
 
@@ -8,9 +8,9 @@ export class ServiceApp implements IServiceApp{
     private context? : AppContext;
     private api? : ServiceAPI;
     
-    private config : AppConfig;
+    private config : ServiceAppConfig;
     
-    constructor(config : AppConfig){
+    constructor(config : ServiceAppConfig){
         this.config = config;
 
     }

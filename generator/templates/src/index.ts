@@ -1,4 +1,4 @@
 import { ServiceApp } from "./app/ServiceApp";
-import { AppConfig, AppDefaultConfig } from "./app/ServiceAppConfig";
+import { ServiceAppConfig, ServiceAppDefaultConfig } from "./app/ServiceAppConfig";
 
-export { AppDefaultConfig,AppConfig,ServiceApp }
+export { ServiceAppDefaultConfig,ServiceAppConfig,ServiceApp }
