@@ -61,7 +61,7 @@ function runScript(){
     const build_tag = cli.flags.version;
 
     const expose_port = package.config.expose_port;
-    const image_name = `${package.config.org}/${package.name}:${build_tag}`;
+    const image_name = `${package.config.org}/${package.name}:${package.version}-${build_tag}`;
     const config_name = `config-${package.name}`;
     
     if(!isDockerConfigExists(config_name))
