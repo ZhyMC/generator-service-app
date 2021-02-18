@@ -87,19 +87,19 @@ module.exports = class extends Generator {
       this.fs.extendJSON(this.destinationPath("./package.json"),{dependencies:package_obj.dependencies});  
       
     }else{
-      this.fs.copyTpl(this.templatePath("./package.json"),this.destinationPath("./package.json"));
+      this.fs.copyTpl(this.templatePath("./package.json"),this.destinationPath("./"));
     }
 
-    this.fs.copyTpl(this.templatePath(".mocharc.json"),this.destinationPath(".mocharc.json"),data);
-    this.fs.copyTpl(this.templatePath("Dockerfile"),this.destinationPath("Dockerfile"),data);
-    this.fs.copyTpl(this.templatePath("Jenkinsfile"),this.destinationPath("Jenkinsfile"),data);
-    this.fs.copyTpl(this.templatePath("LICENSE"),this.destinationPath("LICENSE"),data);
-    this.fs.copyTpl(this.templatePath("tsconfig.json"),this.destinationPath("tsconfig.json"),data);
-    this.fs.copyTpl(this.templatePath("README.md"),this.destinationPath("README.md"),data);
-    this.fs.copyTpl(this.templatePath(".release-it.js"),this.destinationPath(".release-it.js"),data);
-    this.fs.copyTpl(this.templatePath(".gitignore"),this.destinationPath(".gitignore"),data);
-    this.fs.copyTpl(this.templatePath(".npmignore"),this.destinationPath(".npmignore"),data);
-    this.fs.copyTpl(this.templatePath(".dockerignore"),this.destinationPath(".dockerignore"),data);
+    this.fs.copyTpl(this.templatePath("./.mocharc.json"),this.destinationPath("./.mocharc.json"),data);
+    this.fs.copyTpl(this.templatePath("./Dockerfile"),this.destinationPath("./Dockerfile"),data);
+    this.fs.copyTpl(this.templatePath("./Jenkinsfile"),this.destinationPath("./Jenkinsfile"),data);
+    this.fs.copyTpl(this.templatePath("./LICENSE"),this.destinationPath("./LICENSE"),data);
+    this.fs.copyTpl(this.templatePath("./tsconfig.json"),this.destinationPath("./tsconfig.json"),data);
+    this.fs.copyTpl(this.templatePath("./README.md"),this.destinationPath("./README.md"),data);
+    this.fs.copyTpl(this.templatePath("./.release-it.js"),this.destinationPath("./.release-it.js"),data);
+    this.fs.copyTpl(this.templatePath("./.gitignore"),this.destinationPath("./.gitignore"),data);
+    this.fs.copyTpl(this.templatePath("./.npmignore"),this.destinationPath("./.npmignore"),data);
+    this.fs.copyTpl(this.templatePath("./.dockerignore"),this.destinationPath("./.dockerignore"),data);
 
   }
   
