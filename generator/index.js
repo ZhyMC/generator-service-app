@@ -44,6 +44,13 @@ module.exports = class extends Generator {
       message:"要生成默认服务程序源码吗？",
       default:false
     })).generate_source
+
+    this.override = (await this.prompt({
+      type:"confirm",
+      name:"override",
+      message:"要向已有的项目执行增量操作吗？",
+      default:false
+    })).override;
   }
   default(){
     this.destinationRoot(this.serv_name);
@@ -72,7 +79,7 @@ module.exports = class extends Generator {
       package_obj.config.org = this.org_name;
       package_obj.config.expose_port = this.expose_port;
       package_obj.name = this.serv_name;
-      
+
       this.fs.extendJSON(this.destinationPath("./package.json"),{name:package_obj.name});
       this.fs.extendJSON(this.destinationPath("./package.json"),{config:package_obj.config});
       this.fs.extendJSON(this.destinationPath("./package.json"),{scripts:package_obj.scripts});  
@@ -97,6 +104,9 @@ module.exports = class extends Generator {
   }
   
   async install() {
+    if(this.override)
+      return;
+    
     this.spawnCommandSync("npm",["install"]);
     
     this.spawnCommandSync("git",["init"]);
