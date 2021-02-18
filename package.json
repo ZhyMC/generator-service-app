@@ -3,6 +3,11 @@
   "version": "0.0.3",
   "description": "这是Wyatt风格的服务应用开发模板,包含git标准分支模型模板",
   "homepage": "",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "author": {
     "name": "ZhyMc",
     "email": "854185073@qq.com"
@@ -13,6 +18,7 @@
     "yeoman-generator"
   ],
   "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0",
     "jest": "^26.1.0",
     "yeoman-assert": "^3.1.0",
     "yeoman-test": "^1.7.0"
