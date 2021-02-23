@@ -1,6 +1,6 @@
 {
   "name": "generator-service-app",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "这是Wyatt风格的服务应用开发模板,包含git标准分支模型模板",
   "homepage": "",
   "config": {

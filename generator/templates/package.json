@@ -6,6 +6,7 @@
     "config": {
         "org": "<%= org_name %>",
         "expose_port": ["<%= expose_port %>"],
+        "expose_port_random" : [],
         "commitizen": {
             "path": "./node_modules/cz-conventional-changelog"
         }

@@ -25,7 +25,7 @@ pipeline{
         }
         stage("install"){
             steps{
-                sh 'npm ci'
+                sh 'npm ci --registry=https://registry.yarnpkg.com/'
             }
         }
         stage("test"){
