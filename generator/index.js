@@ -87,7 +87,7 @@ module.exports = class extends Generator {
       this.fs.extendJSON(this.destinationPath("./package.json"),{dependencies:package_obj.dependencies});  
       
     }else{
-      this.fs.copyTpl(this.templatePath("./package.json"),this.destinationPath("./"));
+      this.fs.copyTpl(this.templatePath("./package.json"),this.destinationPath("./package.json"),data);
     }
 
     this.fs.copyTpl(this.templatePath("./.mocharc.json"),this.destinationPath("./.mocharc.json"),data);
